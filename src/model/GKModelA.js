@@ -2,7 +2,7 @@ import {GKSUCCESS, modelSetting, cacheAble, clearCache} from 'class2api'
 import {GKErrors} from 'class2api/gkerrors'
 import {DataModel} from "./../tableloader";
 import Auth from "./../model_private/Auth";
-
+import * as types from './../constants'
 
 @modelSetting({
     __Auth:async ({req})=>{
@@ -16,6 +16,8 @@ class GKModelA {
     }
 
     static async hello({name}) {
+        //抛出错误...
+        // throw types.ERROR_PERSONINFO_NOT_READY({name})
         return {message: `this is a message from Api: got name [${name}]`}
     }
 

@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "class2api_demo",
+      "name": "class2api_demo_super",
       "script": "./src/index.js",
       "exec_mode": "cluster",
       "max_memory_restart": "200M",
