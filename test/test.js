@@ -41,7 +41,6 @@ describe('接口服务', function () {
 
     it('/gkmodela/getArticle', async () => {
         let response = await WebInvokeHepler(_run.accounts.user1)('/gkmodela/getArticle', {name:"haungyong"})
-        //console.log(response)
         let {err, result} = response
         let {message} = result
         message.lastIndexOf('hello').should.be.above(-1)
@@ -56,7 +55,7 @@ describe('接口服务', function () {
 
     it('/gkmodela/getArticle With force skip Cache ', async () => {
         let response = await WebInvokeHepler(_run.accounts.user1)('/gkmodela/getArticle', {name:"haungyong",__nocache:1})
-        //console.log(response)
+        console.log(response)
         let {err, result: {__fromCache=false}} = response
         __fromCache.should.be.eql(false)
     })

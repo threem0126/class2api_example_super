@@ -7,6 +7,9 @@ import GKModelA from './model/GKModelA';
 let {redis} = _config
 setting_redisConfig(redis)
 
+let node_env = process.env.NODE_ENV || "development"
+let isDev = (node_env === "development")
+
 const beforeCall = async ({req, params, modelSetting})=> {
     let {__Auth} = modelSetting
     console.log(`[${ req.originalUrl } beforeCall ]:`)
@@ -48,7 +51,8 @@ createServer({
     let port = process.env.PORT || _config.PORT ||  8010;
     server.listen(port, "0.0.0.0",(err)=> {
         if (err) throw err
-        console.info("==> 🌎 Listening on port %s. Open up http://0.0.0.0:%s/ in your browser.", port, port);
+        console.info("==> 🌎 Listening on http://0.0.0.0:%s/. wait request ...", port);
+        if(isDev) console.info("==> For Test: $ mocha test/test.run.js");
     });
     //endregion
 }).catch((error)=> {

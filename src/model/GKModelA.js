@@ -34,8 +34,9 @@ class GKModelA {
      */
     static async getArticle({uID, name}) {
         console.log(GKErrors._SERVER_ERROR('错误1'))
-        let user = await DataModel.DemoUser.findOne()
-        if (user) {
+        await DataModel.DemoUser.create({name:`huang.${Math.random()}`, age:Math.random()})
+        let user = await DataModel.DemoUser.findOne({order:[["id","desc"]]})
+        if (!user) {
             return {message: `hello.${name}: there are nobody!`}
         } else {
             return {message: `hello.${name}:there has one girl,name:${user.name} ${user.age} years old!`}
