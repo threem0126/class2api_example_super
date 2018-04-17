@@ -19,8 +19,3 @@ export const config = {
         defaultExpireSecond: 10 * 60
     }
 }
-
-if(config.redis.cache_prefx === '{cache_prefx}')
-    console.error(`请修改config配置中redis的key前缀（${ __dirname }）`)
-if(config.mysql.host === '{host}')
-    console.error(`请修改config配置中mysql链接信息（${ __dirname }）`)
