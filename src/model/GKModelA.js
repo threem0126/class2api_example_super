@@ -2,7 +2,7 @@ import {GKSUCCESS, modelSetting, cacheAble, clearCache} from 'class2api'
 import {GKErrors} from 'class2api/gkerrors'
 import {DataModel} from "./../tableloader";
 import Auth from "./../model_private/Auth";
-
+import * as types from './../constants'
 
 @modelSetting({
     __Auth:async ({req})=>{
@@ -16,6 +16,8 @@ class GKModelA {
     }
 
     static async hello({name}) {
+        //抛出错误...
+        // throw types.ERROR_PERSONINFO_NOT_READY({name})
         return {message: `this is a message from Api: got name [${name}]`}
     }
 
@@ -32,8 +34,9 @@ class GKModelA {
      */
     static async getArticle({uID, name}) {
         console.log(GKErrors._SERVER_ERROR('错误1'))
-        let user = await DataModel.DemoUser.findOne()
-        if (user) {
+        await DataModel.DemoUser.create({name:`huang.${Math.random()}`, age:Math.random()})
+        let user = await DataModel.DemoUser.findOne({order:[["id","desc"]]})
+        if (!user) {
             return {message: `hello.${name}: there are nobody!`}
         } else {
             return {message: `hello.${name}:there has one girl,name:${user.name} ${user.age} years old!`}

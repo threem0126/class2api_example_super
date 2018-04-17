@@ -1,38 +1,20 @@
 import Promise from 'bluebird'
-import mysql from 'mysql'
 import request from 'request'
 import {setting_redisConfig, cacheAble} from 'class2api'
 import {GKErrors} from 'class2api/gkerrors'
 import _config from "./../config.js" ;
 
-console.log(GKErrors._TOKEN_LOGIN_INVALID())
 
-let {mysql_gankao_mainDB, redis} = _config
+let {redis} = _config
 setting_redisConfig(redis)
-
-let mysql_pool  = mysql.createPool({
-    connectionLimit: 5,
-    ...mysql_gankao_mainDB
-});
-Promise.promisifyAll(mysql_pool)
+ 
 Promise.promisifyAll(request)
 
-const queryGankaoUserInfoByApi = async ({studentInfo}) => {
+const querySiteUserInfoByApi = async ({studentInfo}) => {
     try {
-        let {body: gankaouserInfo} = await request.getAsync({
-            uri: `${_config.gankao_mainsite_authApi}?md5sign=${encodeURI(studentInfo)}`
-        })
-        if(process.env.NODE_ENV !=="production") {
-            console.log(`getUserByCookie from: ${ _config.gankao_mainsite_authApi }?md5sign=${encodeURI(studentInfo)} result: ${ JSON.stringifyline(JSON.parse(gankaouserInfo)) }`)
-        }
-        return JSON.parse(gankaouserInfo)
+        //TODO:查询用户账户数据库
+        return null
     } catch (err) {
-        if(process.env.NODE_ENV!=='production'){
-            setTimeout(()=>{
-                throw  err
-            })
-        }
-        console.error(`从API接口验证用户信息错误：${JSON.stringify(err)}`)
         return null
     }
 }
@@ -60,7 +42,7 @@ export default class {
         let token = req.header('token') || req.cookies.student || ''
         if (token.split(",").length === 3) {
             //从赶考主站接口中查询用户信息
-            let gankaouserInfo = await queryGankaoUserInfoByApi({studentInfo: token})
+            let gankaouserInfo = await querySiteUserInfoByApi({studentInfo: token})
             //如果主站中信息不存在，则取模拟信息
             if (!gankaouserInfo) {
                 gankaouserInfo = await getUserFromDebugToken({token})
@@ -75,7 +57,8 @@ export default class {
             }
             console.log(gankaouserInfo)
 
-            //region 返回数据结构
+            //region 返回数据结构（此处仅示例，各个项目实现都不同）
+
             // { user:
             //     { id: '773995',
             //         nick_name: 'Bob',
@@ -107,9 +90,10 @@ export default class {
 
             //endregion
 
-            let {user, loginMode, grades} = gankaouserInfo
+            let {user} = gankaouserInfo
             return {user_id: user.id, userInfo: gankaouserInfo};
         } else {
+            //throw GKErrors._PARAMS_VALUE_EXPECT({token})
             console.error(`解析cookie中token时，值的格式不符(${token})，期待的是2个逗号间隔的字符串`)
             return {user_id: 0, userInfo: null};
         }

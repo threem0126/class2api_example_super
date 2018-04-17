@@ -3,8 +3,4 @@ if(!process.env.__ISCOMPILING__){
     require('babel-register');
 }
 //
-if(process.env.SERVER_ID==='2'){
-    require('./server2');
-}else {
-    require('./server');
-}
+require('./server');
