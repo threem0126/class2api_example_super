@@ -2,19 +2,15 @@
  */
 
 export const config = {
-    appName: '_no_set_',
-    PORT:3002,
+    appName: '{projname}',
+    PORT: 3002,
     mysql: {
-        host: "127.0.0.1",
-        port: process.env.SQLPORT || "3306",
-        user: "root",
-        password: "",
-        charset: "utf8_general_ci",
-        database: "gankao_demo123",
-        reset_key:{
-            key1:'123234537569',
-            key2:'wrq5hfoiuy12344376'
-        }
+        host: "{ip}",
+        port: process.env.SQLPORT || "{port}",
+        user: "{user}",
+        password: "{pwd}",
+        charset: "{charset}",
+        database: "{database}"
     },
     redis: {
         host: "127.0.0.1",
@@ -23,3 +19,8 @@ export const config = {
         defaultExpireSecond: 10 * 60
     }
 }
+
+if(config.redis.cache_prefx === '_no_set_')
+    console.error(`请修改config配置中redis的key前缀（${ __dirname }）`)
+if(config.mysql.host === '{ip}')
+    console.error(`请修改config配置中mysql链接信息（${ __dirname }）`)
