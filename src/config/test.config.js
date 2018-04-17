@@ -2,15 +2,19 @@
  */
 
 export const config = {
-    appName: '{projname}',
+    appName: '{projectName}',
     PORT: 3002,
     mysql: {
         host: "{ip}",
         port: process.env.SQLPORT || "{port}",
         user: "{user}",
-        password: "{pwd}",
+        password: "{password}",
         charset: "{charset}",
-        database: "{database}"
+        database: "{database}",
+        reset_key: {
+            key1: '123234537569',
+            key2: 'wrq5hfoiuy12344376'
+        }
     },
     redis: {
         host: "127.0.0.1",

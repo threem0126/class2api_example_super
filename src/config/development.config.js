@@ -2,13 +2,13 @@
  */
 
 export const config = {
-    appName: '{projname}',
+    appName: '{projectName}',
     PORT: 3002,
     mysql: {
         host: "{ip}",
         port: process.env.SQLPORT || "{port}",
         user: "{user}",
-        password: "{pwd}",
+        password: "{password}",
         charset: "{charset}",
         database: "{database}",
         reset_key: {
