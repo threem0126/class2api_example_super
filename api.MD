@@ -1,4 +1,4 @@
-# hello测试方法 #- 接口：http://127.0.0.1:3002/a2/hello- post参数：```json{
+# hello测试方法 #- 接口：undefined- post参数：```json{
   "name": "haungyong"
 }```- 请求结果：```json{
   "err": null,
@@ -6,8 +6,8 @@
     "message": "this is a message from Api: got name [haungyong]"
   }
 }```
-# 编辑文章 #- 接口：http://127.0.0.1:3002/admin/editArticle- post参数：```json{
-  "aID": 0.6251429828096726
+# 编辑文章 #- 接口：undefined- post参数：```json{
+  "aID": 0.9051652538736152
 }```- 请求结果：```json{
   "err": {
     "_gankao": 1,
@@ -17,8 +17,8 @@
   },
   "result": null
 }```
-# 删除文章 #- 接口：http://127.0.0.1:3002/admin/deleteArticle- post参数：```json{
-  "aID": 0.967419589295613
+# 删除文章 #- 接口：undefined- post参数：```json{
+  "aID": 0.5637279078608073
 }```- 请求结果：```json{
   "err": null,
   "result": {
