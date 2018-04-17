@@ -46,7 +46,6 @@ createServer({
     afterCall,
     config:{
         redis,
-        frontpage_default:_config.frontPage.site,
         cros:true,
         cros_origin:['http://web.domain.com'],
         cros_headers:[]
