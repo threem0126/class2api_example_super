@@ -3,8 +3,6 @@ import * as types from './constants'
 import {createServer,setting_redisConfig} from 'class2api'
 import {GKErrors} from 'class2api/gkerrors'
 import GKModelA from './model/GKModelA';
-import GKRuleManager from './model/GKRuleManager'
-import GKAdmin_ModelA from './model_admin/GKAdmin_ModelA'
 
 //types.EXAMPLE
 
@@ -41,7 +39,7 @@ const afterCall = async ({req,result})=> {
 
 //创建微服务对象
 createServer({
-    modelClasses:[GKModelA, {model:GKModelA, as:'a2'}, GKRuleManager, {model:GKAdmin_ModelA,as:"admin"}],
+    modelClasses:[GKModelA, {model:GKModelA, as:'a2'}],
     beforeCall,
     afterCall,
     config:{
