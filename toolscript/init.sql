@@ -1,4 +1,4 @@
-CREATE TABLE `{databaseName}`.`demousers` (
+CREATE TABLE IF NOT EXISTS `{databaseName}`.`demousers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `age` int(11) NOT NULL DEFAULT '0',

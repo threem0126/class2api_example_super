@@ -5,7 +5,7 @@ export const config = {
     appName: '{projectName}',
     PORT: 3002,
     mysql: {
-        host: "{ip}",
+        host: "{host}",
         port: process.env.SQLPORT || "{port}",
         user: "{user}",
         password: "{password}",
